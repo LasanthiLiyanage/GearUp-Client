@@ -20,19 +20,19 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.updateCartCount();
 
-    // Initialize modal
+    
     const cartModalElement = document.getElementById('cartModal');
     if (cartModalElement) {
       this.cartModel = new bootstrap.Modal(cartModalElement);
     }
 
-    // Subscribe to cart changes
+   
     this.cartService.cartChanged.subscribe(() => {
       this.updateCartCount();
       this.loadCartItems();
     });
 
-    // Subscribe to cart count updates
+    
     this.cartService.cartCount$.subscribe(count => {
       this.cartCount = count;
     });

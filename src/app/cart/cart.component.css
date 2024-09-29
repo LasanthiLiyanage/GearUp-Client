@@ -42,16 +42,16 @@
   }
   
   .quantity-container input {
-    margin-right: 15px; /* Adjust this value to control spacing */
+    margin-right: 15px; 
   }
 
   .success-snackbar {
-    background-color: #4caf50; /* Green for success */
+    background-color: #4caf50;
     color: white;
   }
   
   .error-snackbar {
-    background-color: #f44336; /* Red for error */
+    background-color: #f44336;
     color: white;
   }
   
