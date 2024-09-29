@@ -1,0 +1,57 @@
+.container {
+    max-width: 800px;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .card-body {
+    padding: 2rem;
+  }
+  
+  h5 {
+    font-weight: bold;
+  }
+  
+  .list-group-item {
+    border: none;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .list-group-item h5 {
+    font-size: 1.25rem;
+  }
+  
+  .list-group-item p {
+    margin: 0;
+    color: #6c757d;
+  }
+  
+  button {
+    border-radius: 8px;
+  }
+
+  .quantity-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .quantity-container input {
+    margin-right: 15px; /* Adjust this value to control spacing */
+  }
+
+  .success-snackbar {
+    background-color: #4caf50; /* Green for success */
+    color: white;
+  }
+  
+  .error-snackbar {
+    background-color: #f44336; /* Red for error */
+    color: white;
+  }
+  

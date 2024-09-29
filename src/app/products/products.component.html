@@ -1,0 +1,43 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row mb-md-5 justify-content-center align-self-center">
+    <div class="col-md-4 m-md-2 card img-thumbnail" style="width: 18rem;" *ngFor="let product of products">    
+    
+      <div class="card-body text-center d-flex flex-column align-items-center">      
+        <img [src]="product.imageUrl" class="card-img-top mb-3" alt="{{ product.name }}" style="height: 150px; width: 100%; object-fit: contain;">
+    
+          <div class="product-details">
+            <h5 class="card-title"><strong>{{ product.name }}</strong></h5>
+            <p class="card-text"><strong>Description:</strong> {{ product.description }}</p>
+            <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+          </div>
+       
+      </div>
+      
+      <div class="card-footer d-flex justify-content-between">
+        <button class="btn btn-primary w-50 h-100 mx-1" style="height: 50px; font-size: 12px;" (click)="openModal(product)">View</button>        
+        <button class="btn btn-success w-50 h-100 mx-1" style="height: 50px; font-size: 12px;" (click)="addToCart(product)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="selectedProduct" class="modal fade show" tabindex="-1" style="display: block; background: rgba(0, 0, 0, 0.5);" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ selectedProduct.name }}</h5>
+        <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img [src]="selectedProduct.imageUrl" class="img-fluid mb-3" alt="{{ selectedProduct.name }}">
+        <p><strong>Description:</strong> {{ selectedProduct.description }}</p>
+        <p><strong>Price:</strong> ${{ selectedProduct.price }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
