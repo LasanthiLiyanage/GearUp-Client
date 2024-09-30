@@ -39,6 +39,7 @@ export class CartComponent implements OnInit {
         });
     } else {
       alert('Customer not found');
+      this.toastr.error('Customer not found.', 'Title');
     }
   }
 
@@ -46,10 +47,12 @@ export class CartComponent implements OnInit {
     this.cartService.updateCartItemQuantity(cartItemId, productId, quantity).subscribe(
       response => {
         alert('Quantity updated successfully.');
+        this.toastr.success('Quantity updated successfully.', 'Success');
         this.loadCart();
       },
       error => {
         alert('Error updating quantity: ' + error.message);
+        this.toastr.error('Error updating quantity: ' + error.message, 'Error');
       }
     );
   }
@@ -75,6 +78,7 @@ export class CartComponent implements OnInit {
       });
     } else {
       alert('Customer not found');
+      this.toastr.error('Customer not found.', 'Error');
     }
   }
 
@@ -115,6 +119,7 @@ export class CartComponent implements OnInit {
       this.cartService.clearCart(customerId).subscribe(() => {
         this.cartItems = [];  
         alert('Cart has been cleared');
+        this.toastr.success('Cart has been cleared.', 'Success');
       });
     }
   }
