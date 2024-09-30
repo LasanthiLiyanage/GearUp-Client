@@ -4,18 +4,22 @@ import { Product } from './product.model';
 import { Cart } from '../cart/cart.model';
 import { CartService } from '../cart/cart.service';
 import { CartItem } from '../cart/cartItem.model';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products',
-  templateUrl: './products.component.html'
+  templateUrl: './products.component.html',
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
-  selectedProduct: Product | null = null; 
+  selectedProduct: Product | null = null;
   cart: Cart[] = [];
 
-  constructor(private productService: ProductService, private cartService: CartService) {}
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.loadProducts();
@@ -23,14 +27,15 @@ export class ProductsComponent implements OnInit {
 
   loadProducts(): void {
     this.productService.getProducts().subscribe(
-      data => {
+      (data) => {
         this.products = data;
       },
-      error => {
+      (error) => {
         console.error('Error fetching products', error);
+        this.toastr.error('Error fetching products' + error,'');
       }
     );
-  }  
+  }
 
   openModal(product: Product): void {
     this.selectedProduct = product;
@@ -63,19 +68,24 @@ export class ProductsComponent implements OnInit {
         },
         error: (err) => {
           alert('Error adding to cart: ' + err.message);
-        }
+          this.toastr.error('Error adding to cart: ' + err.message,'');
+        },
       });
     } else {
       alert('Customer ID not found!');
-    }    
+      this.toastr.error('Customer ID not found!','');
+    }
   }
 
   updateCartCount(): void {
     const customerId = localStorage.getItem('customerId');
     if (customerId) {
-      this.cartService.getCart(customerId).subscribe(cartItems => {
-        const cartCount = cartItems.reduce((acc: any, item: { quantity: any; }) => acc + item.quantity, 0);
-        this.cartService.updateCartCount(cartCount);  
+      this.cartService.getCart(customerId).subscribe((cartItems) => {
+        const cartCount = cartItems.reduce(
+          (acc: any, item: { quantity: any }) => acc + item.quantity,
+          0
+        );
+        this.cartService.updateCartCount(cartCount);
       });
     }
   }
